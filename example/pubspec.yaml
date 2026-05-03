@@ -1,0 +1,7 @@
+name: custom_progressbar_example
+
+dependencies:
+  flutter:
+    sdk: flutter
+  custom_progressbar:
+    path: ../

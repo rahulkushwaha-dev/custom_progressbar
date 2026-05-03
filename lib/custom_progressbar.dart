@@ -1,3 +1,3 @@
 library custom_progressbar;
 
-export 'src/progressbar.dart';
+export 'src/progress_bar.dart';

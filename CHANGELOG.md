@@ -1,9 +1,32 @@
-## 0.0.1
+## 1.1.1 -2026-05-03
 
-* This is our first release
+- ✨ Introduced new API with `size`, `center`, and `progress`
+- 🔄 Maintained backward compatibility with deprecated API
+- 📸 Improved README with GIF examples
+- 🛠 Improved defaults and null safety
+
+---
+
+## 1.0.1 -2026-05-03 
+
+- 📸 Updated README.md
+- 🔧 Minor improvements and fixes
+
+---
+
+## 1.0.0 - 2026-05-03
+
+- 🚀 Initial stable release
+- 🔗 Repository updated
+
+---
 
 ## 0.0.2
-Redmi.md file updated
 
-## 1.0.1
-Redmi.md file updated New Repo updated
+- 📄 Updated README.md
+
+---
+
+## 0.0.1
+
+- 🎉 Initial release
