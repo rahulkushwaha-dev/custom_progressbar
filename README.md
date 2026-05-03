@@ -1,31 +1,39 @@
-This is a package for custom progress where we have icon in the middle and progressbar around it we can use it when we want with different icons . progress
 
-Getting started
+This is a package for custom progress where we have icon in the middle and progressbar around it
+we can use it when we want with different icons . progress
+
+## Getting started
 This is a package for custom progress where we have icon in the middle and progressbar around it
 
-recording
+![recording](assets/recording.gif)
 
-Usage
-We can use ProgressBar as Widget for Custom progress.Here is some parameters of custom Progressbar. containerHeight is height of container.
 
-containerWidth is width of container.
+## Usage 
 
-progressColor is color of ProgressBar.
+We can use ``ProgressBar`` as Widget for Custom progress.Here is some parameters of
+custom Progressbar. 
+`containerHeight` is height of container.
 
-boxFit is boxfit of container.
+`containerWidth` is width of container.
 
-iconHeight is height of icon.
+`progressColor` is color of ProgressBar.
 
-iconWidth is width of icon.
+`boxFit` is boxfit of container.
 
-imageFile is asset file of icon as String.
+`iconHeight` is height of icon.
 
-progressStrokeWidth is width of progressStroke.
+`iconWidth` is width of icon.
 
-progressHeight is height of Progressbar.
+`imageFile` is asset file  of icon as String.
 
-progressWidth is width of Progressbar.
+`progressStrokeWidth` is width of progressStroke.
 
+`progressHeight` is height of Progressbar.
+
+`progressWidth` is width of Progressbar.
+
+      
+```
 ProgressBar(
 containerHeight: 40,
 containerWidth: 40,
@@ -38,3 +46,6 @@ progressStrokeWidth: 3.0,
 progressHeight: 50,
 progressWidth: 50,
 ),
+
+```
+>>>>>>> 3792598 (feat: New RepoUpdated for Progressbar SDk)
