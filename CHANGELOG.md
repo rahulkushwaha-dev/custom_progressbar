@@ -1,4 +1,4 @@
-## 1.1.1 -2026-05-03
+## 2.0.0 -2026-05-03
 
 - ✨ Introduced new API with `size`, `center`, and `progress`
 - 🔄 Maintained backward compatibility with deprecated API

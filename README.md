@@ -20,7 +20,7 @@ Add this to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  custom_progressbar: 1.1.1
+  custom_progressbar: 2.0.0
 ```
 
 ---
