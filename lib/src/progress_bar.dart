@@ -45,16 +45,20 @@ class ProgressBar extends StatelessWidget {
   /// OLD API (deprecated)
   @Deprecated('Use center instead')
   final BoxFit? boxFit;
+
   /// OLD API (deprecated)
   @Deprecated('Use size instead')
   final double? containerHeight, containerWidth;
   @Deprecated('Use center instead')
+
   /// OLD API (deprecated)
   final double? iconHeight, iconWidth;
   @Deprecated('Use center instead')
+
   /// OLD API (deprecated)
   final String? imageFile;
   @Deprecated('Use size instead')
+
   /// OLD API (deprecated)
   final double? progressHeight, progressWidth;
 
