@@ -6,7 +6,9 @@ void main() {
   runApp(const MyApp());
 }
 
+/// Example app entry point.
 class MyApp extends StatelessWidget {
+  /// Example app entry point[MyApp].
   const MyApp({super.key});
 
   @override
