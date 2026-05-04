@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Fixed LICENSE file (added full MIT license text)
+- 
 ## 2.0.0 -2026-05-03
 
 - ✨ Introduced new API with `size`, `center`, and `progress`
