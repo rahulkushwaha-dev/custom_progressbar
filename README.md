@@ -1,6 +1,10 @@
+[![pub package](https://img.shields.io/pub/v/custom_progressbar.svg)](https://pub.dev/packages/custom_progressbar)
+[![likes](https://img.shields.io/pub/likes/custom_progressbar)](https://pub.dev/packages/custom_progressbar/score)
 # Custom ProgressBar
 
-🚀 A highly customizable circular progress bar for Flutter with support for center widgets, theming, and flexible sizing.
+🚀 A lightweight and customizable circular progress bar for Flutter.
+
+Supports flexible sizing, custom center widgets (Text, Icon, Image), and full theming control.
 
 ---
 
@@ -10,7 +14,7 @@
 * 🎯 Custom center widget (Icon, Text, Image, etc.)
 * 🎨 Custom colors & stroke width
 * 📱 Lightweight & easy to use
-* 🔄 Backward compatible
+* 🔄 Backward compatibility with legacy API
 
 ---
 
@@ -21,6 +25,13 @@ Add this to your `pubspec.yaml`:
 ```yaml
 dependencies:
   custom_progressbar: 2.0.0
+```
+
+## 🚀 Getting Started
+
+``` dart
+Import the package:
+import 'package:custom_progressbar/custom_progressbar.dart';
 ```
 
 ---
@@ -52,6 +63,10 @@ dependencies:
 ![Image](assets/6.gif)
 
 ---
+
+## 🧪 Example
+
+Check the /example folder for a complete working app.
 
 ## 🚀 Usage
 
@@ -222,3 +237,8 @@ The old API is still supported for backward compatibility, but **not recommended
 ## ❤️ Support
 
 If you like this package, consider giving it a ⭐ on GitHub!
+
+
+## 📄 License
+
+MIT License © 2026 Rahul Kushwaha
