@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'custom_progress.dart';
+
 /// A customizable circular progress bar.
 ///
 /// Supports both new and deprecated APIs.
@@ -22,7 +24,7 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 /// A customizable progress bar widget.
-class ProgressBar extends StatelessWidget {
+class ProgressBar extends StatefulWidget {
   // New Migration Parameters
   /// This is the height and width of Container / ProgressBar i,e size
   final double? size;
@@ -62,6 +64,8 @@ class ProgressBar extends StatelessWidget {
   /// OLD API (deprecated)
   final double? progressHeight, progressWidth;
 
+  final bool isClockwise;
+
   /// Creates a [ProgressBar].
   const ProgressBar({
     super.key,
@@ -71,6 +75,7 @@ class ProgressBar extends StatelessWidget {
     this.size,
     this.progress,
     this.center,
+   required this.isClockwise,
     @Deprecated('Use size instead') this.containerWidth,
     @Deprecated('Use size instead') this.containerHeight,
     @Deprecated('Use center instead') this.boxFit,
@@ -82,10 +87,72 @@ class ProgressBar extends StatelessWidget {
   });
 
   @override
+  State<ProgressBar> createState() => _ProgressBarState();
+}
+
+class _ProgressBarState extends State<ProgressBar>
+    with SingleTickerProviderStateMixin {
+
+  late AnimationController _controller;
+  late Animation<double> _animation;
+  double _oldProgress = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+
+    if (widget.progress == null) {
+      _controller.repeat();
+    } else {
+      _animation = Tween<double>(
+        begin: 0,
+        end: widget.progress!,
+      ).animate(CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeInOut,
+      ));
+
+      _controller.forward();
+    }
+  }
+
+  @override
+  void didUpdateWidget(covariant ProgressBar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.progress != null) {
+      _oldProgress = oldWidget.progress ?? 0;
+
+      _animation = Tween<double>(
+        begin: _oldProgress,
+        end: widget.progress!,
+      ).animate(CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeInOut,
+      ));
+
+      _controller
+        ..reset()
+        ..forward();
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final bool isUsingNewApi = size != null || center != null;
+    final bool isUsingNewApi = widget.size != null || widget.center != null;
     assert(
-      size != null || (containerHeight != null && containerWidth != null),
+      widget.size != null || (widget.containerHeight != null && widget.containerWidth != null),
       'Provide size (new API) or both containerHeight & containerWidth (old API)',
     );
 
@@ -97,7 +164,7 @@ class ProgressBar extends StatelessWidget {
   }
 
   Widget _buildNew(BuildContext context) {
-    final double effectiveSize = size ?? (containerHeight ?? 40);
+    final double effectiveSize = widget.size ?? (widget.containerHeight ?? 40);
 
     return SizedBox(
       width: effectiveSize,
@@ -105,46 +172,56 @@ class ProgressBar extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          if (center != null) center!,
-          SizedBox(
-            width: effectiveSize,
-            height: effectiveSize,
-            child: CircularProgressIndicator(
-              value: progress?.clamp(0.0, 1.0),
-              strokeWidth: progressStrokeWidth ?? 4,
-              valueColor: AlwaysStoppedAnimation(
-                  progressColor ?? Theme.of(context).colorScheme.primary),
-              backgroundColor: progressBackgroundColor ?? Colors.grey.shade300,
-            ),
-          ),
+          if (widget.center != null) widget.center!,
+
+          AnimatedBuilder(
+            animation: _controller,
+            builder: (_, __) {
+              return CustomPaint(
+                size: Size(effectiveSize, effectiveSize),
+                painter: ProgressPainter(
+                  progress: widget.progress == null
+                ? _controller.value
+                    : _animation.value,
+                  color: widget.progressColor ??
+                      Theme.of(context).colorScheme.primary,
+                  backgroundColor:
+                  widget.progressBackgroundColor ?? Colors.grey.shade300,
+                  strokeWidth: widget.progressStrokeWidth ?? 4,
+                  isClockwise: widget.isClockwise,
+                ),
+              );
+            },
+          )
         ],
       ),
     );
   }
 
+  // Widget _buildNew(BuildContext context) {
   Widget _buildOld(BuildContext context) {
     return SizedBox(
-      height: containerHeight ?? 40,
-      width: containerWidth ?? 40,
+      height: widget.containerHeight ?? 40,
+      width: widget.containerWidth ?? 40,
       child: Stack(
         alignment: Alignment.center,
         children: [
-          if (imageFile != null)
+          if (widget.imageFile != null)
             ClipOval(
               child: Image.asset(
-                imageFile!,
-                fit: boxFit ?? BoxFit.contain,
-                height: iconHeight,
-                width: iconWidth,
+                widget.imageFile!,
+                fit: widget.boxFit ?? BoxFit.contain,
+                height: widget.iconHeight,
+                width: widget.iconWidth,
               ),
             ),
           SizedBox(
-            height: progressHeight ?? containerHeight ?? 40,
-            width: progressWidth ?? containerWidth ?? 40,
+            height: widget.progressHeight ?? widget.containerHeight ?? 40,
+            width: widget.progressWidth ?? widget.containerWidth ?? 40,
             child: CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(
-                  progressColor ?? Theme.of(context).colorScheme.primary),
-              strokeWidth: progressStrokeWidth ?? 4.0,
+                  widget.progressColor ?? Theme.of(context).colorScheme.primary),
+              strokeWidth: widget.progressStrokeWidth ?? 4.0,
             ),
           ),
         ],

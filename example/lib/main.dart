@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
             child: Center(
                 child: ProgressBar(
           size: 90,
+          isClockwise: true,
           progressColor: Colors.amber,
           progressBackgroundColor: Colors.green,
           progressStrokeWidth: 2,
